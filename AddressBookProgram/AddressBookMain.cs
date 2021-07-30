@@ -6,9 +6,11 @@ namespace AddressBookProgram
 {
     class AddressBookMain
     {
+        public static List<Person> ContactList = new List<Person>();
+
         public void Display()
         {
-            Console.WriteLine(" Welcome to Address Book Program ");
+            Console.WriteLine(" Welcome to Address Book Program \n");
         }
     }
 }
