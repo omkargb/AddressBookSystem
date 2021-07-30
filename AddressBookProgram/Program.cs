@@ -6,8 +6,8 @@ namespace AddressBookProgram
     {
         static void Main(string[] args)
         {
-            AddressBookMain book = new AddressBookMain();
-            book.Display();
+            AddressBookMain adr = new AddressBookMain();
+            adr.Book();
         }
     }
 }
