@@ -12,21 +12,22 @@ namespace AddressBookProgram
         public void Book()
         {
             Console.WriteLine(" Welcome to Address Book Program \n");
-            Console.WriteLine(" No contacts in address book... \n [ ADD CONTACT ] Please provide following details : \n");
+            Console.WriteLine(" No contacts in address book... \n [ ADD CONTACT ] Please provide following details : ");
             AddPersonInfo();
         }
 
         //options to select operation
         public static void Operations()
         {
-            Console.WriteLine(" Available options : \t 1.Edit_contact\t\t 0.Exit ");
+            Console.WriteLine(" Available options : \t1.Edit_contact\t\t2.Delete_Contact\t\t 0.Exit ");
             Console.Write(" Provide option :  ");
             int check = int.Parse(Console.ReadLine());
-               switch(check)
+            string findName;
+               switch (check)
                 {
                 case 1:
                         Console.Write(" Enter Firstname to find and edit info : ");
-                        string findName = Console.ReadLine();
+                        findName = Console.ReadLine();
                         foreach (var entry in ContactList)
                         {
                             if (entry.FirstName.ToLower() == findName.ToLower())
@@ -42,6 +43,12 @@ namespace AddressBookProgram
                         }
                         Operations();
                         break;
+                case 2:
+                        Console.Write("\n [ DELETE CONTACT ]  Enter Firstname to find and delete contact : ");
+                        findName = Console.ReadLine();
+                        DeletePersonInfo(findName);
+                        DisplayContacts();
+                        break;
                 default:
                         break;
                 }
@@ -52,7 +59,7 @@ namespace AddressBookProgram
         {
             Person persn = new Person();
 
-            Console.Write(" Enter First Name : ");
+            Console.Write("\n Enter First Name : ");
             persn.FirstName = Console.ReadLine();
 
             Console.Write(" Enter Last Name : ");
@@ -84,8 +91,8 @@ namespace AddressBookProgram
         //edit contact method
         public static void ModifyPersonInfo()
         {
-            Console.WriteLine("\n [ EDIT CONTACT ] Select Field to edit -\n 1:First_name  2:Last_name  3:Address  4:City  5:State  6.Zipcode  7:Phone_Number  8.EmailId ");
-            Console.WriteLine(" Type 0 to Exit Edit option. ");
+            Console.WriteLine("\n [ EDIT CONTACT ] Select Field to edit -\n 1.First_name   2.Last_name   3.Address   4.City   5.State   6.Zipcode   7:Phone_Number   8.EmailId ");
+            Console.WriteLine(" Type 0 to Exit Edit operation. ");
             Console.Write(" Please provide an option : ");
             int choice = int.Parse(Console.ReadLine());
 
@@ -134,6 +141,24 @@ namespace AddressBookProgram
             }
         }
 
+        //delete selected contact
+        public static void DeletePersonInfo(string findName)
+        {
+            for (int i = 0; i < ContactList.Count; i++)
+            {
+                if (ContactList[i].FirstName.Equals(findName))
+                {
+                    ContactList.RemoveAt(i);
+                    Console.WriteLine(" Contact Removed. ");
+                }
+                else
+                {
+                    Console.WriteLine(" Contact not present or ContactList is empty... Please Add contacts. \n");
+                    break;
+                }
+            }
+        }
+
         //display saved Contacts
         public static void DisplayContacts()
         {
@@ -145,10 +170,18 @@ namespace AddressBookProgram
                 Console.WriteLine(" Phone Number \t: {0} \n EmailId \t: {1} \n", persn.PhoneNumber, persn.EmailId);
             }
 
-            Console.WriteLine("\n Displying saved contact details : \n");
-            foreach (var persn in ContactList)
+            if (ContactList.Count >= 1)
             {
-                DisplayFormat(persn);
+                Console.WriteLine("\n Displying saved contact details : \n");
+                foreach (var persn in ContactList)
+                {
+                    DisplayFormat(persn);
+                }
+            }
+            else
+            {
+                Console.WriteLine(" No contacts Present. Please add new contact. \n");
+                AddPersonInfo();
             }
         }
     }
