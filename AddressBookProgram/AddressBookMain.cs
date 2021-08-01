@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AddressBookProgram
@@ -19,36 +20,29 @@ namespace AddressBookProgram
         //options to select operation
         public static void Operations()
         {
-            Console.WriteLine(" Available options : \t1.Edit_contact\t\t2.Delete_Contact\t\t 0.Exit ");
+            Console.WriteLine(" Available options : \t1.Add_contact\t\t2.Edit_contact\t\t3.Delete_Contact\t\t 0.Exit ");
             Console.Write(" Provide option :  ");
             int check = int.Parse(Console.ReadLine());
             string findName;
                switch (check)
                 {
                 case 1:
-                        Console.Write(" Enter Firstname to find and edit info : ");
-                        findName = Console.ReadLine();
-                        foreach (var entry in ContactList)
-                        {
-                            if (entry.FirstName.ToLower() == findName.ToLower())
-                            {
-                                    ModifyPersonInfo();
-                                    DisplayContacts();
-                            }
-                            else
-                            {
-                                Console.WriteLine(" Firstname does not match. Please retry. \n");
-                                Operations();
-                            }
-                        }
-                        Operations();
-                        break;
+                    AddPersonInfo();
+                    break;
                 case 2:
+                    Console.Write(" Enter Firstname to find and edit info : ");
+                    findName = Console.ReadLine();
+                    ModifyPersonInfo(findName);
+                    DisplayContacts();
+                    Operations();
+                        break;
+                case 3:
                         Console.Write("\n [ DELETE CONTACT ]  Enter Firstname to find and delete contact : ");
                         findName = Console.ReadLine();
                         DeletePersonInfo(findName);
                         DisplayContacts();
-                        break;
+                        Operations();
+                    break;
                 default:
                         break;
                 }
@@ -89,54 +83,57 @@ namespace AddressBookProgram
         }
 
         //edit contact method
-        public static void ModifyPersonInfo()
+        public static void ModifyPersonInfo(string name)
         {
-            Console.WriteLine("\n [ EDIT CONTACT ] Select Field to edit -\n 1.First_name   2.Last_name   3.Address   4.City   5.State   6.Zipcode   7:Phone_Number   8.EmailId ");
+            Console.WriteLine("\n [ EDIT CONTACT ] Select Field to edit -\n 1.First_name\t2.Last_name\t3.Address\t4.City\t5.State\t6.Zipcode\t7.Phone_Number\t8.EmailId ");
             Console.WriteLine(" Type 0 to Exit Edit operation. ");
             Console.Write(" Please provide an option : ");
             int choice = int.Parse(Console.ReadLine());
 
             foreach (var persn in ContactList)
             {
-                switch (choice)
+                if (persn.FirstName == name)
                 {
-                    case 1:
-                        Console.Write(" Modify FirstName : ");
-                        persn.FirstName = Console.ReadLine();
-                        return;
-                    case 2:
-                        Console.Write(" Modify LastName : ");
-                        persn.LastName = Console.ReadLine();
-                        return;
-                    case 3:
-                        Console.Write(" Modify AddressLine : ");
-                        persn.Address = Console.ReadLine();
-                        return;
-                    case 4:
-                        Console.Write(" Modify City : ");
-                        persn.City = Console.ReadLine();
-                        return;
-                    case 5:
-                        Console.Write(" Modify State : ");
-                        persn.State = Console.ReadLine();
-                        return;
-                    case 6:
-                        Console.Write(" Modify ZipCode : ");
-                        persn.ZipCode =int.Parse(Console.ReadLine());
-                        return;
-                    case 7:
-                        Console.Write(" Modify PhoneNumber : ");
-                        persn.PhoneNumber = Console.ReadLine();
-                        return;
-                    case 8:
-                        Console.Write(" Modify EmailId : ");
-                        persn.EmailId = Console.ReadLine();
-                        return;
-                    case 0:
-                        break;
-                    default:
-                        Console.WriteLine(" Invalid value entered.");
-                        break;
+                    switch (choice)
+                    {
+                        case 1:
+                            Console.Write(" Modify FirstName : ");
+                            persn.FirstName = Console.ReadLine();
+                            return;
+                        case 2:
+                            Console.Write(" Modify LastName : ");
+                            persn.LastName = Console.ReadLine();
+                            return;
+                        case 3:
+                            Console.Write(" Modify AddressLine : ");
+                            persn.Address = Console.ReadLine();
+                            return;
+                        case 4:
+                            Console.Write(" Modify City : ");
+                            persn.City = Console.ReadLine();
+                            return;
+                        case 5:
+                            Console.Write(" Modify State : ");
+                            persn.State = Console.ReadLine();
+                            return;
+                        case 6:
+                            Console.Write(" Modify ZipCode : ");
+                            persn.ZipCode = int.Parse(Console.ReadLine());
+                            return;
+                        case 7:
+                            Console.Write(" Modify PhoneNumber : ");
+                            persn.PhoneNumber = Console.ReadLine();
+                            return;
+                        case 8:
+                            Console.Write(" Modify EmailId : ");
+                            persn.EmailId = Console.ReadLine();
+                            return;
+                        case 0:
+                            break;
+                        default:
+                            Console.WriteLine(" Invalid value entered.");
+                            break;
+                    }
                 }
             }
         }
@@ -144,18 +141,19 @@ namespace AddressBookProgram
         //delete selected contact
         public static void DeletePersonInfo(string findName)
         {
+            int deleted = 0;
             for (int i = 0; i < ContactList.Count; i++)
             {
                 if (ContactList[i].FirstName.Equals(findName))
                 {
                     ContactList.RemoveAt(i);
                     Console.WriteLine(" Contact Removed. ");
+                    deleted = 1;
                 }
-                else
-                {
-                    Console.WriteLine(" Contact not present or ContactList is empty... Please Add contacts. \n");
-                    break;
-                }
+            }
+            if(deleted!=1)
+            {
+                Console.WriteLine(" Contact not present. ");
             }
         }
 
@@ -186,4 +184,3 @@ namespace AddressBookProgram
         }
     }
 }
-
