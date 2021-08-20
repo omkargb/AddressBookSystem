@@ -51,50 +51,59 @@ namespace AddressBookProgram
 
         }
 
-
         // add contact method
         public static void AddPersonInfo(string adrBookName)
         {
-            if (contactsDictionary.ContainsKey(adrBookName))
+            Console.WriteLine("\n Working on address book : " + adrBookName);
+            Person persn = new Person();
+
+            Console.Write("\n Enter First Name : ");
+            persn.FirstName = Console.ReadLine();
+
+            // UC7: search duplicate entry of first name
+            DuplicateNameCheck(persn.FirstName);
+
+            Console.Write(" Enter Last Name : ");
+            persn.LastName = Console.ReadLine();
+
+            Console.Write(" Enter Address/landmark : ");
+            persn.Address = Console.ReadLine();
+
+            Console.Write(" Enter City : ");
+            persn.City = Console.ReadLine();
+
+            Console.Write(" Enter State : ");
+            persn.State = Console.ReadLine();
+
+            Console.Write(" Enter PinCode : ");
+            persn.ZipCode = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write(" Enter Phone Number (+91) : ");
+            persn.PhoneNumber = Console.ReadLine();
+
+            Console.Write(" Enter EmailId : ");
+            persn.EmailId = Console.ReadLine();
+
+            contactsDictionary[adrBookName].Add(persn);
+            ContactManager.Operations();
+
+        }
+
+        static void DuplicateNameCheck(string searchName)
+        {
+            Console.Write(" --> Checking existing first names : ");
+            bool isPresent = contactsDictionary.Values.SelectMany(contact => contact).Any(adrBookName => adrBookName. FirstName.ToUpper(). Equals(searchName.ToUpper()));
+
+            if (isPresent)
             {
-
-                Console.WriteLine("\n Working on address book : " + adrBookName);
-                Person persn = new Person();
-
-                Console.Write("\n Enter First Name : ");
-                persn.FirstName = Console.ReadLine();
-
-                Console.Write(" Enter Last Name : ");
-                persn.LastName = Console.ReadLine();
-
-                Console.Write(" Enter Address/landmark : ");
-                persn.Address = Console.ReadLine();
-
-                Console.Write(" Enter City : ");
-                persn.City = Console.ReadLine();
-
-                Console.Write(" Enter State : ");
-                persn.State = Console.ReadLine();
-
-                Console.Write(" Enter PinCode : ");
-                persn.ZipCode = Convert.ToInt32(Console.ReadLine());
-
-                Console.Write(" Enter Phone Number (+91) : ");
-                persn.PhoneNumber = Console.ReadLine();
-
-                Console.Write(" Enter EmailId : ");
-                persn.EmailId = Console.ReadLine();
-
-                contactsDictionary[adrBookName].Add(persn);
-                ContactManager.Operations();
+                Console.Write(" This name already exists. Please add different one.\n");
+                AddPersonInfo(adrBookName);
             }
             else
             {
-                Console.WriteLine(" Address book not found. Please retry.");
-                ContactManager.Operations();
+                Console.WriteLine(" No duplicate Entry");
             }
         }
-
 
         //edit contact method
         public static void ModifyPersonInfo(string adrBookName, string findName)

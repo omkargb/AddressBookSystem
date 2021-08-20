@@ -16,9 +16,9 @@ namespace AddressBookProgram
             switch (userAction)
             {
                 case 1:
-                    Console.Write("\n  Enter addressbook name to select and add contact : ");
+                    Console.Write("\n Enter addressbook name to select and add contact : ");
                     searchAdrBookName = Console.ReadLine();
-
+                    CheckAddresssBook(searchAdrBookName);
                     AddressBookMain.AddPersonInfo(searchAdrBookName);
                     Operations();
                     break;
@@ -28,6 +28,7 @@ namespace AddressBookProgram
                     searchAdrBookName = Console.ReadLine();
                     Console.Write("\n  Enter Firstname to find and edit contact : ");
                     findName = Console.ReadLine();
+                    CheckAddresssBook(searchAdrBookName);
 
                     AddressBookMain.ModifyPersonInfo(searchAdrBookName, findName);
                     AddressBookMain.DisplayContacts(searchAdrBookName);
@@ -39,6 +40,7 @@ namespace AddressBookProgram
                     searchAdrBookName = Console.ReadLine();
                     Console.Write("\n  Enter Firstname to find and delete contact : ");
                     findName = Console.ReadLine();
+                    CheckAddresssBook(searchAdrBookName);
 
                     AddressBookMain.DeletePersonInfo(searchAdrBookName, findName);
                     AddressBookMain.DisplayContacts(searchAdrBookName);
@@ -46,12 +48,12 @@ namespace AddressBookProgram
                     break;
 
                 case 4:
-                    Console.WriteLine(" Here are available address books : ");
+                    Console.Write("\n Here are available address books : ");
                     foreach (var ab in AddressBookMain.contactsDictionary)
                     {
                         Console.Write("\t" + ab.Key);
                     }
-                    Console.Write("\n Enter address book name : ");
+                    Console.Write("\n\n Enter address book name : ");
                     searchAdrBookName = Console.ReadLine();
                     AddressBookMain.DisplayContacts(searchAdrBookName);
                     Operations();
@@ -63,9 +65,22 @@ namespace AddressBookProgram
                     Operations();
                     break;
 
+                case 0: break;
                 default:
                     break;
             }
+
+             void CheckAddresssBook(string searchAdrBookName)
+            {
+                foreach (var ab in AddressBookMain.contactsDictionary)
+                {
+                    if ((ab.Key).ToUpper().Equals(searchAdrBookName.ToUpper()))
+                    {   
+                        continue;   
+                    }
+                }
+            }
+
         }
 
     }
