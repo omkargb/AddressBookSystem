@@ -9,7 +9,8 @@ namespace AddressBookProgram
         //options to select operation
         public static void Operations()
         {
-            Console.WriteLine("\n Available options :\n 1.Add_contact\t 2.Edit_contact\t 3.Delete_Contact\t 4.View_contacts\n 5.New_address_book\t 6.Search_person_by_cityOrState\t7.DisplayByCityState \t0.Exit \n");
+            Console.WriteLine("\n Available options :\n 1.Add_contact \t 2.Edit_contact \t 3.Delete_Contact \t 4.View_contacts \n 5.New_address_book \t\t 6.Search_person_by_cityOrState \n 7.ViewPerson_ByCityOrState \t 7.GetCount_Ofperson_byCityOrState \t 0.Exit \n");
+
             Console.Write(" Provide option :  ");
             int userAction = int.Parse(Console.ReadLine());
             string findName, searchAdrBookName;
