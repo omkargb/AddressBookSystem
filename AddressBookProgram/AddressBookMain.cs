@@ -318,5 +318,25 @@ namespace AddressBookProgram
 
         }
 
+        public static void SortAddressBook()
+        {
+            Console.Write("\n Enter addressbook name to sort contacts : ");
+            string AdrBookName = Console.ReadLine();
+            if (contactsDictionary.ContainsKey(AdrBookName))
+            {
+                contactsDictionary[AdrBookName].Sort((pair1, pair2) => pair1.FirstName.ToUpper().CompareTo(pair2.FirstName.ToUpper()));
+                Console.WriteLine(" Displaying Full names in sorted dictionary ");
+                foreach (var data in contactsDictionary[adrBookName])
+                {
+                    Console.Write(" {0} {1} ,", data.FirstName, data.LastName);
+                }
+                Console.WriteLine("\n Sorting done. ");
+            }
+            else
+            {
+                Console.WriteLine("The given addressbook  not found. please retry..");
+                SortAddressBook();
+            }
+        }
     }
 }
