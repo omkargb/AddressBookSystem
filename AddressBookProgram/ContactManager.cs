@@ -9,7 +9,7 @@ namespace AddressBookProgram
         //options to select operation
         public static void Operations()
         {
-            Console.WriteLine("\n Available options :\n 1.Add_contact \t\t 2.Edit_contact \t 3.Delete_Contact \t 4.View_contacts \n 5.New_address_book \t\t 6.Search_person_by_cityOrState \n 7.ViewPerson_ByCityOrState \t 7.GetCount_Ofperson_byCityOrState \t 8.Sort_addressBook_contacts \n 0.Exit \n");
+            Console.WriteLine("\n Available options :\n 1.Add_contact \t\t 2.Edit_contact \t 3.Delete_Contact \t 4.View_contacts \n 5.New_address_book \t\t 6.Search_person_by_cityOrState \n 7.ViewPerson_ByCityOrState \t\t 7.GetCount_Ofperson_byCityOrState \t\t 8.Sort_addressBook_contacts \n 9.Read_Write_Contacts_UsingFileOperations \t\t 0.Exit \n");
 
             Console.Write(" Provide option :  ");
 
@@ -78,6 +78,11 @@ namespace AddressBookProgram
 
                 case 8:
                     AddressBookMain.SortAddressBook();
+                    Operations();
+                    break;
+
+                case 9:
+                    ContactFileOperations.FileOps();
                     Operations();
                     break;
 
