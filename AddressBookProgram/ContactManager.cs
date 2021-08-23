@@ -9,14 +9,16 @@ namespace AddressBookProgram
         //options to select operation
         public static void Operations()
         {
-            Console.WriteLine("\n Available options :\n 1.Add_contact \t 2.Edit_contact \t 3.Delete_Contact \t 4.View_contacts \n 5.New_address_book \t\t 6.Search_person_by_cityOrState \n 7.ViewPerson_ByCityOrState \t 7.GetCount_Ofperson_byCityOrState \t 8.Sort_addressBook_contacts \n 0.Exit \n");
+            Console.WriteLine("\n Available options :\n 1.Add_contact \t\t 2.Edit_contact \t 3.Delete_Contact \t 4.View_contacts \n 5.New_address_book \t\t 6.Search_person_by_cityOrState \n 7.ViewPerson_ByCityOrState \t 7.GetCount_Ofperson_byCityOrState \t 8.Sort_addressBook_contacts \n 0.Exit \n");
 
             Console.Write(" Provide option :  ");
+
             int userAction = int.Parse(Console.ReadLine());
             string findName, searchAdrBookName;
             switch (userAction)
             {
                 case 1:
+                    AddressBookMain.DisplayABList();
                     Console.Write("\n Enter addressbook name to select and add contact : ");
                     searchAdrBookName = Console.ReadLine();
                     CheckAddresssBook(searchAdrBookName);
@@ -25,7 +27,7 @@ namespace AddressBookProgram
                     break;
 
                 case 2:
-                    DisplayABList();
+                    AddressBookMain.DisplayABList();
                     Console.Write("\n  Enter addressbook name to find and edit contact : ");
                     searchAdrBookName = Console.ReadLine();
                     Console.Write("\n  Enter Firstname to find and edit contact : ");
@@ -38,7 +40,7 @@ namespace AddressBookProgram
                     break;
 
                 case 3:
-                    DisplayABList();
+                    AddressBookMain.DisplayABList();
                     Console.Write("\n  Enter addressbook name to find and delete contact : ");
                     searchAdrBookName = Console.ReadLine();
                     Console.Write("\n  Enter Firstname to find and delete contact : ");
@@ -51,7 +53,7 @@ namespace AddressBookProgram
                     break;
 
                 case 4:
-                    DisplayABList();
+                    AddressBookMain.DisplayABList();
                     Console.Write("\n\n Enter address book name : ");
                     searchAdrBookName = Console.ReadLine();
                     AddressBookMain.DisplayContacts(searchAdrBookName);
@@ -106,16 +108,6 @@ namespace AddressBookProgram
                     Operations();
                 }
             }
-
-            void DisplayABList()
-            {
-                Console.Write("\n Here are available address books : ");
-                foreach (var ab in AddressBookMain.contactsDictionary)
-                {
-                    Console.Write("\t" + ab.Key);
-                }
-            }
         }
-
     }
 }
